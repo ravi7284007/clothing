@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import {
     signInWithGooglePopup,
-    createUserDocumentFromAuth,
     signInAuthUserWithEmailAndPassword
 } from '../../utils/firebase/firebase.utils';
+
 
 import FormInput from '../form-input/form-input.component';
 import './sign-in-form.styles.scss';
@@ -24,15 +24,15 @@ const SignInForm = () => {
 
 
     const signInWithGoogle = async () => {
-        const { user } = await signInWithGooglePopup();
-        await createUserDocumentFromAuth(user)
+        await signInWithGooglePopup();
+
     }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
-            const response = await signInAuthUserWithEmailAndPassword(email, password)
+            const { user } = await signInAuthUserWithEmailAndPassword(email, password)
 
             resetFormFields();
 
